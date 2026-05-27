@@ -67,8 +67,7 @@ pub async fn handle_read<R: FsRunner + ?Sized>(
         .fs_read_stream(state.shell_sock, path.clone())
         .await?;
 
-    let channel = iii
-        .create_channel(Some(64))
+    let channel = iii_sdk::helpers::create_channel(iii, Some(64))
         .await
         .map_err(|e| SandboxError::FsIo(format!("create_channel: {e}")))?;
 
